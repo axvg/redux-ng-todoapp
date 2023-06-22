@@ -42,6 +42,10 @@ export class TodoItemComponent {
     this.store.dispatch(actions.updateTodo({ id: this.todo.id, text: this.txtInput.value }));
   }
 
+  delete(){
+    this.store.dispatch(actions.deleteTodo({ id: this.todo.id }));
+  }
+
   chckCompleted!: FormControl;
   txtInput!: FormControl;
   

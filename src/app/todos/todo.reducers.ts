@@ -22,5 +22,8 @@ export const todoReducer = createReducer(
       }
       return todo;
     });
+  }),
+  on(actions.deleteTodo, (state, { id }) => {
+    return state.filter((todo) => todo.id !== id);
   })
 );
