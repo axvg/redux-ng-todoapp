@@ -14,5 +14,13 @@ export const todoReducer = createReducer(
       }
       return todo;
     });
+  }),
+  on(actions.updateTodo, (state, { id, text }) => {
+    return state.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, text };
+      }
+      return todo;
+    });
   })
 );

@@ -25,6 +25,8 @@ export class TodoItemComponent {
 
   edit(){
     this.editing = true;
+    this.txtInput.setValue(this.todo.text);
+
     setTimeout(() => {
       this.txtInputF.nativeElement.select();
     }, 1)
@@ -32,6 +34,12 @@ export class TodoItemComponent {
 
   finishEdition(){
     this.editing = false;
+
+    if (this.txtInput.invalid || this.txtInput.value === this.todo.text) {
+      return;
+    }
+
+    this.store.dispatch(actions.updateTodo({ id: this.todo.id, text: this.txtInput.value }));
   }
 
   chckCompleted!: FormControl;
