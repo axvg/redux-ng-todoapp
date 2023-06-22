@@ -6,6 +6,7 @@ import { TodoModule } from './todos/todo.module';
 import { FooterComponent } from './footer/footer.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { todoReducer } from './todos/todo.reducers';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     BrowserModule,
     TodoModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({todos: todoReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 10, logOnly: !isDevMode() }),
   ],
   providers: [],
