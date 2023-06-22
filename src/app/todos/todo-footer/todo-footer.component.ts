@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as actions from '../filtro/filtro.actions';
+import * as actions from '../filter/filter.actions';
 import { AppState } from 'src/app/app.reducer';
-import { setFilter } from '../filtro/filtro.actions';
+import { setFilter } from '../filter/filter.actions';
 
 @Component({
   selector: 'app-todo-footer',
@@ -14,8 +14,13 @@ export class TodoFooterComponent {
   selectedFilter: actions.validFilter = 'all' as actions.validFilter;
   filters: actions.validFilter[] = ['all', 'active', 'completed'];
 
+  activeNumber: number = 0;
+
   ngOnInit(){
-    this.store.select('filter').subscribe(filter => this.selectedFilter = filter);
+    this.store.subscribe(state => {
+      this.selectedFilter = state.filter;
+      this.activeNumber = state.todos.filter(todo => !todo.completed).length;
+    });
   }
 
   filterBy(filter: actions.validFilter){
