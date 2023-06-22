@@ -6,5 +6,13 @@ export const initialState: Todo[] = [new Todo('Lorem Ipsum')];
 
 export const todoReducer = createReducer(
   initialState,
-  on(actions.createTodo, (state, { text }) => [... state, new Todo(text)]),
+  on(actions.createTodo, (state, { text }) => [...state, new Todo(text)]),
+  on(actions.toggleTodo, (state, { id }) => {
+    return state.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+  })
 );
