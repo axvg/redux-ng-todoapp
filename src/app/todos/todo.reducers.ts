@@ -30,5 +30,8 @@ export const todoReducer = createReducer(
     return state.map((todo) => {
       return { ...todo, completed: !todo.completed };
     });
-  })
-);
+  }),
+  on(actions.deleteCompletedTodos, (state) => {
+    return state.filter((todo) => !todo.completed);
+  }),
+)
